@@ -17,16 +17,16 @@ module.exports = {
     },
 
     createChurches: async (req, res) => {
-        // fs.createReadStream("./Churches.csv")
-        //     .pipe(parse({ delimiter: ",", from_line: 2 }))
-        //     .on("data", async function (row) {
-        //         const id = uuidv4();
-        //         await db.query(
-        //             `INSERT INTO dbo.churches (_id, constituentId, constituentSASMD, primaryAddress, preferredAddressLine, preferredCityState, preferredZip, churchNumber, constituentAddedBy, preferredAddressLine1, preferredAddressLine2, advoCount, preferredCity, preferredState) VALUES
-        // 		( '${id}', '${row[0]}', '${row[1]}', '${row[2]}', '${row[3]}', '${row[4]}', '${row[5]}', '${row[6]}', '${row[7]}', '${row[8]}', '${row[9]}', '${row[10]}', '${row[11]}', '${row[12]}')`
-        //         );
-        //         count++;
-        //     });
+        fs.createReadStream("./Churches.csv")
+            .pipe(parse({ delimiter: ",", from_line: 2 }))
+            .on("data", async function (row) {
+                const id = uuidv4();
+                await db.query(
+                    `INSERT INTO dbo.churches (_id, constituentId, constituentSASMD, primaryAddress, preferredAddressLine, preferredCityState, preferredZip, churchNumber, constituentAddedBy, preferredAddressLine1, preferredAddressLine2, advoCount, preferredCity, preferredState) VALUES
+        		( '${id}', '${row[0]}', '${row[1]}', '${row[2]}', '${row[3]}', '${row[4]}', '${row[5]}', '${row[6]}', '${row[7]}', '${row[8]}', '${row[9]}', '${row[10]}', '${row[11]}', '${row[12]}')`
+                );
+                count++;
+            });
 
         res.json({ message: "DONE" });
     },
