@@ -7,7 +7,9 @@ const { validateCampaign } = require("../validation/validateCampaign");
 module.exports = {
     getCampaigns: async (req, res) => {
         try {
-            let result = await db.query("select * from campaigns");
+            let result = await db.query(
+                "select * from campaigns ca inner join churches ch on ca.church = ch._id"
+            );
             // const projects = parseResults(result);
             res.status(200).json({ campaigns: result?.recordset || [] });
         } catch (error) {
